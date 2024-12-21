@@ -1,2 +1,2 @@
-# Logo-detection
-A project for detecting and distinguishing between logos using few shot learning methods
+# Hand-writing verification
+A project for authenticating hand writing authors using few-shot learning methods
