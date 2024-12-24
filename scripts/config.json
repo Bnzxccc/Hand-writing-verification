@@ -1,29 +1,24 @@
 {
-    # Paths for data
+    
     "train_data_path": "data/raw/train_set",
     "test_data_path": "data/raw/test_data",
+    "image_size": [300, 300],  
 
-    # Image configuration
-    "image_size": [300, 300],  # Example: (width, height)
-
-    # Training parameters
-    "evaluate": False,
+    
+    "evaluate": false,
     "train_size": 50000, 
     "val_size": 5000, 
     "batch_size": 32,
-    "buffer_size": 1000,  # Buffer size for shuffling the dataset
+    "buffer_size": 1000, 
     "learning_rate": 0.0001,
     "n_epochs": 20,
     "margin": 0.5,
-
-    # MLflow parameters 
+    
     "mlflow_experiment_name": "siamese_network_experiment",
     "mlflow_tracking_uri": "http://localhost:5000", 
-    "mlflow_log_metrics": True,  
-    "mlflow_log_model": True,  
+    "mlflow_log_metrics": true,  
+    "mlflow_log_model": true,  
 
-    # Additional parameters for your experiment
     "params": {
-        # Add any additional parameters specific to your experiment
     }
 }
