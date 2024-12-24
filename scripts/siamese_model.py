@@ -30,7 +30,7 @@ def EmbeddingModule(imageSize):
 class SiameseModel(keras.Model):
   def __init__(self, imageSize, embedder, margin, lossTracker):
     super().__init__()
-    self.siameseNetwork = self.getSiameseModel(input_shape = imageSize + (3,), embedder)
+    self.siameseNetwork = self.getSiameseModel(input_shape = imageSize + (3,), embedder = embedder)
     self.margin = margin
     self.lossTracker = lossTracker
 
