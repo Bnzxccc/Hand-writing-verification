@@ -4,7 +4,7 @@ from keras import layers
 from keras.applications import resnet_v2
 
 def EmbeddingModule(imageSize):
-  base_model = resnet_v2.ResNet50V2(weights='imagenet', include_top=False, input_shape=input_shape)
+  base_model = resnet_v2.ResNet50V2(weights='imagenet', include_top=False, input_shape=imageSize + (3,))
   for layer in base_model.layers:
     layer.trainable = False
 
