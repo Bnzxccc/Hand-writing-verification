@@ -15,7 +15,7 @@
     "margin": 0.5,
     
     "mlflow_experiment_name": "siamese_network_experiment",
-    "mlflow_tracking_uri": "http://localhost:5000", 
+    "mlflow_tracking_uri": "mlruns", 
     "mlflow_log_metrics": true,  
     "mlflow_log_model": true,  
 
