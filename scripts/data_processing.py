@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow import keras
 import os
 import random
-import tensorflow_io as tfio
 
 class MapFunction:
   def __init__(self, imageSize):
@@ -12,8 +11,7 @@ class MapFunction:
   def decode_resize(self, filePath):
     # transform the image by path
     raw_image = tf.io.read_file(filePath)
-    image = tfio.experimental.image.decode_tiff(raw_image)
-    image = image[:,:,:3] # since images have alpha channel
+    image = tf.image.decode_image(raw_image, channels=3)
     image = tf.image.resize(image, self.imageSize)
     image = tf.ensure_shape(image, (self.imageSize[0], self.imageSize[1], 3))
 
