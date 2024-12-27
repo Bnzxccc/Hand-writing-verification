@@ -13,7 +13,7 @@ class MapFunction:
     # transform the image by path
     raw_image = tf.io.read_file(filePath)
     image = tfio.experimental.image.decode_tiff(raw_image)
-    iimage = image[..., :3]
+    image = image[..., :3] if image.shape[-1] > 3 else image
     image = tf.image.resize(image, self.imageSize)
     image = tf.ensure_shape(image, (self.imageSize[0], self.imageSize[1], 3))
 
