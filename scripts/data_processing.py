@@ -27,11 +27,10 @@ class MapFunction:
     return anchor, positive, negative
 
 class TripletGenerator:
-  def __init__(self, datasetPath, n_samples):
+  def __init__(self, datasetPath):
     self.datasetPath = datasetPath
     self.validWriters = set() # classes with more than 1 samples
     self.articleCount = dict()
-    self.n_samples = n_samples
 
     for filePath in os.listdir(self.datasetPath):
       writer = filePath.split('-')[0]
@@ -55,7 +54,7 @@ class TripletGenerator:
 
 
   def __call__(self):
-    for _ in range(self.n_samples):
+    while True:
       tempValidWriters = list(self.validWriters)
 
       anchorClass = random.choice(tempValidWriters)
