@@ -22,7 +22,7 @@ def EmbeddingModule(imageSize):
   x = layers.Dropout(0.4)(x)
   output = layers.Dense(128, activation = 'relu')(x)
 
-  embedding = keras.Model(input, output, name = 'Embedding Module')
+  embedding = keras.Model(input, output, name = 'Embedding_Module')
 
   return embedding
 
@@ -45,7 +45,7 @@ class SiameseModel(keras.Model):
 
     siamese_network = keras.Model(inputs=[anchor_input, positive_input, negative_input],
                                   outputs=[anchor_embedding, positive_embedding, negative_embedding],
-                                  name="Siamese Network")
+                                  name="Siamese_Network")
 
     return siamese_network
 
