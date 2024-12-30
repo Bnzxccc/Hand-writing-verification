@@ -57,8 +57,8 @@ class SiameseModel(keras.Model):
     positive_embedding = outputs[1]
     negative_embedding = outputs[2]
 
-    apDistance = tf.reduce_sum(tf.square(anchor_embedding - positive_embedding))
-    anDistance = tf.reduce_sum(tf.square(anchor_embedding - negative_embedding))
+    apDistance = tf.reduce_sum(tf.square(anchor_embedding - positive_embedding), axis = -1)
+    anDistance = tf.reduce_sum(tf.square(anchor_embedding - negative_embedding), axis = -1)
 
     return (apDistance, anDistance)
 
