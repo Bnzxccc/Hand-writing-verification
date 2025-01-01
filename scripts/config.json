@@ -13,8 +13,8 @@
     "steps_per_epoch": 312,
     "validation_steps": 62,
     "learning_rate": 0.0001,
-    "n_epochs": 20,
-    "margin": 0.5,
+    "n_epochs": 10,
+    "margin": 0.6,
     
     "mlflow_experiment_name": "siamese_network_experiment",
     "mlflow_tracking_uri": "mlruns", 
