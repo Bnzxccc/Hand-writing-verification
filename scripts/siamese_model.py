@@ -91,3 +91,12 @@ class SiameseModel(keras.Model):
   @property
   def metrics(self):
     return [self.lossTracker]
+
+  def get_config(self):
+    config = super(SiameseModel, self).get_config()
+    config.update({"margin": self.margin})
+    return config
+
+  @classmethod
+  def from_config(cls, config):
+    return cls(**config)
