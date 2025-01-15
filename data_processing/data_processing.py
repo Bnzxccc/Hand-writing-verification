@@ -40,6 +40,7 @@ class TripletGenerator:
     self.validWriters = set() # classes with more than 1 samples
     self.articleCount = dict()
 
+    # Extract labels
     for filePath in os.listdir(self.datasetPath):
       writer = filePath.split('-')[0]
 
