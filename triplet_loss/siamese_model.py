@@ -3,31 +3,16 @@ from tensorflow import keras
 from keras import layers
 from keras.applications import resnet_v2
 
-def EmbeddingModule(imageSize):
-  base_model = resnet_v2.ResNet50V2(weights='imagenet', include_top=False, input_shape=imageSize + (3,))
-  for layer in base_model.layers:
-    layer.trainable = False
-
-
-  input = keras.Input(imageSize + (3,))
-  x = resnet_v2.preprocess_input(input)
-
-  extracted_features = base_model(x)
-
-  x = layers.GlobalAveragePooling2D()(extracted_features)
-  x = layers.Dense(512, activation='relu')(x)
-  x = layers.Dropout(0.4)(x)
-  x = layers.BatchNormalization()(x)
-  x = layers.Dense(256, activation='relu')(x)
-  x = layers.Dropout(0.4)(x)
-  output = layers.Dense(128, activation = 'relu')(x)
-
-  embedding = keras.Model(input, output, name = 'Embedding_Module')
-
-  return embedding
-
-
 class SiameseModel(keras.Model):
+  """
+    A custom Siamese network model for learning embeddings and computing triplet loss.
+
+  Args:
+        imageSize: Tuple of integers (height, width). Specifies the input image dimensions.
+        embedder: A Keras model that extracts embeddings from input images.
+        margin: Float. The margin value for the triplet loss function.
+        lossTracker: A Keras metric object used to track and report loss values during training.
+  """
   def __init__(self, imageSize, embedder, margin, lossTracker):
     super().__init__()
     self.siameseNetwork = self.getSiameseModel(input_shape = imageSize + (3,), embedder = embedder)
@@ -65,7 +50,7 @@ class SiameseModel(keras.Model):
   def _compute_loss(self, inputs):
     apDistance, anDistance = self._compute_distance(inputs)
     loss = tf.maximum(apDistance - anDistance + self.margin, 0)
-    return loss
+    return tf.reduce_mean(loss)
 
   def train_step(self, inputs):
     with tf.GradientTape() as tape:

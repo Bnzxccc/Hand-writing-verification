@@ -10,7 +10,15 @@ class MapFunction:
     self.imageSize = imageSize
 
   def decode_resize(self, filePath):
-    # transform the image by path
+     """
+      Decodes and resizes the image from the file path.
+
+      Args:
+          filePath (str): Path to the image file.
+
+      Returns:
+          Tensor: Preprocessed image tensor.
+      """
     raw_image = tf.io.read_file(filePath)
     image = tfio.experimental.image.decode_tiff(raw_image)
     image = image[:,:,:3]
@@ -43,8 +51,8 @@ class TripletGenerator:
         if self.articleCount[writer] >= 2 and writer not in self.validWriters:
           self.validWriters.add(writer)
 
-    self.articleByWriter = {writer: [] for writer in self.validWriters}
     # dictionary of class names as keys and list of image paths as values
+    self.articleByWriter = {writer: [] for writer in self.validWriters}
 
     for filePath in os.listdir(self.datasetPath):
       writerName = filePath.split('-')[0]
